@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.nextstacks.sharedprefernce.R;
@@ -23,6 +24,9 @@ public class TabActivity extends AppCompatActivity {
 
 
         tabLayout.setupWithViewPager(viewPager);
+
+
+//        Bundle data = getIntent().getExtras();
 
     }
 }

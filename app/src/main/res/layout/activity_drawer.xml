@@ -19,6 +19,13 @@
             android:minHeight="?attr/actionBarSize" />
 
 
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#da1da1" />
+
+
     </LinearLayout>
 
 

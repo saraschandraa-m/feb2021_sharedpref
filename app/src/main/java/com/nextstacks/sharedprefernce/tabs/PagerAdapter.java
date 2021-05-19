@@ -1,5 +1,7 @@
 package com.nextstacks.sharedprefernce.tabs;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,7 +20,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return new ChatFragment();
+        Bundle args = new Bundle();
+        args.putInt("SCREEN", position);
+        Fragment chatFragment = new ChatFragment();
+        chatFragment.setArguments(args);
+        return chatFragment;
     }
 
     @Override

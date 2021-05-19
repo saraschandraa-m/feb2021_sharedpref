@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +22,33 @@ public class ChatFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(@NonNull View view1, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view1, savedInstanceState);
+
+        TextView mTvTitle = view1.findViewById(R.id.tv_fragment_title);
+
+        Bundle data = getArguments();
+
+        if (data != null) {
+            int position = data.getInt("SCREEN");
+
+            String title = "";
+            switch (position) {
+                case 1:
+                    title = "Status Fragment";
+                    break;
+
+                case 2:
+                    title = "Calls Fragment";
+                    break;
+
+                default:
+                    title = "Chat Fragment";
+                    break;
+            }
+
+            mTvTitle.setText(title);
+        }
+
     }
 }
