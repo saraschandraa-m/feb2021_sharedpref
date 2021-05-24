@@ -2,10 +2,13 @@ package com.nextstacks.sharedprefernce.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -46,5 +49,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COL_BLOODGROUP, student.bloodGroup);
 
         database.insert(TABLE_NAME, null, cv);
+    }
+
+    public ArrayList<StudentDetails> getDataFromDatabase(SQLiteDatabase database) {
+        ArrayList<StudentDetails> studentList = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                StudentDetails data = new StudentDetails();
+                data.rollNo = cursor.getString(cursor.getColumnIndex(COL_ROLLNO));
+                data.phoneNo = cursor.getString(cursor.getColumnIndex(COL_PHONE));
+                data.name = cursor.getString(cursor.getColumnIndex(COL_NAME));
+                data.bloodGroup = cursor.getString(cursor.getColumnIndex(COL_BLOODGROUP));
+                data.emailID = cursor.getString(cursor.getColumnIndex(COL_EMAIL));
+
+                studentList.add(data);
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        return studentList;
     }
 }

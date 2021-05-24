@@ -9,21 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SharedPrefernce">
-        <activity android:name=".database.AddStudentDetailActivity">
+        <activity android:name=".database.ViewStudentsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".tabs.TabActivity"></activity>
-        <activity android:name=".drawerlayout.BottomNavActivity"></activity>
+        <activity android:name=".database.AddStudentDetailActivity">
+
+        </activity>
+        <activity android:name=".tabs.TabActivity" />
+        <activity android:name=".drawerlayout.BottomNavActivity" />
         <activity android:name=".toolbar.ToolbarActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".drawerlayout.DrawerActivity">
-
-        </activity>
+        <activity android:name=".drawerlayout.DrawerActivity"></activity>
     </application>
 
 </manifest>
