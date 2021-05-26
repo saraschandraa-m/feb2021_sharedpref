@@ -73,4 +73,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return studentList;
     }
+
+    public void deleteDataFromDatabase(SQLiteDatabase database, StudentDetails student) {
+        database.delete(TABLE_NAME, COL_ROLLNO + "=" + student.rollNo, null);
+    }
 }

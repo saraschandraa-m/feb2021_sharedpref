@@ -2,6 +2,7 @@ package com.nextstacks.sharedprefernce.database;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,10 @@ public class AddStudentDetailActivity extends AppCompatActivity {
                 student.phoneNo = studentPhone;
 
                 dbHelper.insertDataToDatabase(dbHelper.getWritableDatabase(), student);
+
+
+                setResult(Activity.RESULT_OK);
+                finish();
             }
         });
     }
