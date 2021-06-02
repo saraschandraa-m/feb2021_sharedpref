@@ -15,6 +15,8 @@ public class AddStudentDetailActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
 
+    private boolean isEdit = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,24 @@ public class AddStudentDetailActivity extends AppCompatActivity {
         EditText mEtStudentEmail = findViewById(R.id.et_student_email);
 
         Button mBtnInsert = findViewById(R.id.btn_insert_student);
+
+        Bundle data = getIntent().getExtras();
+
+        if (data != null) {
+            isEdit = data.getBoolean("ISEDIT");
+            StudentDetails studentDetails = (StudentDetails) data.getSerializable("STUDENT");
+
+            if (studentDetails != null) {
+                mEtStudentName.setText(studentDetails.name);
+                mEtStudentPhone.setText(studentDetails.phoneNo);
+                mEtStudentRollNo.setText(studentDetails.rollNo);
+                mEtStudentBloodGroup.setText(studentDetails.bloodGroup);
+                mEtStudentEmail.setText(studentDetails.emailID);
+
+                mEtStudentRollNo.setEnabled(false);
+                mBtnInsert.setText("UPDATE DATA");
+            }
+        }
 
         dbHelper = new DatabaseHelper(AddStudentDetailActivity.this);
 
@@ -48,7 +68,11 @@ public class AddStudentDetailActivity extends AppCompatActivity {
                 student.emailID = studentEmail;
                 student.phoneNo = studentPhone;
 
-                dbHelper.insertDataToDatabase(dbHelper.getWritableDatabase(), student);
+                if (!isEdit) {
+                    dbHelper.insertDataToDatabase(dbHelper.getWritableDatabase(), student);
+                } else {
+                    dbHelper.updateDataToDatabase(dbHelper.getWritableDatabase(), student);
+                }
 
 
                 setResult(Activity.RESULT_OK);

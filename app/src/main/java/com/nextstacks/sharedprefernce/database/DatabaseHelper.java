@@ -51,6 +51,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         database.insert(TABLE_NAME, null, cv);
     }
 
+
+    public void updateDataToDatabase(SQLiteDatabase database, StudentDetails studentDetails) {
+        ContentValues cv = new ContentValues();
+        cv.put(COL_BLOODGROUP, studentDetails.bloodGroup);
+        cv.put(COL_PHONE, studentDetails.phoneNo);
+        cv.put(COL_NAME, studentDetails.name);
+        cv.put(COL_EMAIL, studentDetails.emailID);
+
+        database.update(TABLE_NAME, cv, COL_ROLLNO + "=" + studentDetails.rollNo, null);
+    }
+
     public ArrayList<StudentDetails> getDataFromDatabase(SQLiteDatabase database) {
         ArrayList<StudentDetails> studentList = new ArrayList<>();
 

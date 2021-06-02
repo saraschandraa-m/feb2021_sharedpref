@@ -62,7 +62,10 @@ public class ViewStudentsActivity extends AppCompatActivity implements StudentDe
 
     @Override
     public void onEditClicked(StudentDetails studen) {
-
+        Intent editIntent = new Intent(ViewStudentsActivity.this, AddStudentDetailActivity.class);
+        editIntent.putExtra("STUDENT", studen);
+        editIntent.putExtra("ISEDIT", true);
+        startActivityForResult(editIntent, 134);
     }
 
     @Override

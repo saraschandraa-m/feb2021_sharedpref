@@ -1,6 +1,8 @@
 package com.nextstacks.sharedprefernce.database;
 
-public class StudentDetails {
+import java.io.Serializable;
+
+public class StudentDetails implements Serializable {
 
     public String name;
     public String rollNo;
