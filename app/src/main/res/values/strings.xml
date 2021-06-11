@@ -3,4 +3,15 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+
+    <string-array name="news_categories">
+        <item>business</item>
+        <item>entertainment</item>
+        <item>general</item>
+        <item>health</item>
+        <item>science</item>
+        <item>sports</item>
+        <item>technology</item>
+    </string-array>
 </resources>
