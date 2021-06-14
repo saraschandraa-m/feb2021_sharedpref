@@ -77,7 +77,7 @@ public class NewsActivity extends AppCompatActivity implements CategoryListAdapt
     }
 
 
-    private void getCategoryNews(String category){
+    private void getCategoryNews(String category) {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
 
@@ -90,7 +90,8 @@ public class NewsActivity extends AppCompatActivity implements CategoryListAdapt
         getTopHeadles.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-
+                Log.i("GetNews_Category", "Success");
+                Log.i("GetNews_Category", response.body());
             }
 
             @Override
@@ -101,9 +102,8 @@ public class NewsActivity extends AppCompatActivity implements CategoryListAdapt
     }
 
 
-
     @Override
     public void onCategorySelected(String category) {
-
+        getCategoryNews(category);
     }
 }
