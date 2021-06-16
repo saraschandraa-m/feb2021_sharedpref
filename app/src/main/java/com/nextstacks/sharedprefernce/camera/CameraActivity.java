@@ -9,10 +9,14 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -20,12 +24,17 @@ import android.widget.Toast;
 
 import com.nextstacks.sharedprefernce.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+
 public class CameraActivity extends AppCompatActivity {
 
     private int cameraID;
 
     private FrameLayout mCameraFrame;
     private Camera camera;
+    private ImageView mIvPreviewImge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +45,7 @@ public class CameraActivity extends AppCompatActivity {
 
         ImageView mIvFlipCamera = findViewById(R.id.iv_camera_flip);
         ImageView mIvCaptureImage = findViewById(R.id.iv_camera_capture);
-        ImageView mIvPreviewImge = findViewById(R.id.iv_image_preview);
+        mIvPreviewImge = findViewById(R.id.iv_image_preview);
 
         mIvFlipCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +69,9 @@ public class CameraActivity extends AppCompatActivity {
                     @Override
                     public void onPictureTaken(byte[] data, Camera camera) {
                         Bitmap displayImgBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                        mIvPreviewImge.setImageBitmap(displayImgBitmap);
-                        camera.startPreview();
+//                        mIvPreviewImge.setImageBitmap(displayImgBitmap);
+//                        camera.startPreview();
+                        storageImageToDevice(displayImgBitmap);
                     }
                 });
             }
@@ -98,5 +108,43 @@ public class CameraActivity extends AppCompatActivity {
         camera = Camera.open(cameraID);
         CameraSurfaceView surfaceView = new CameraSurfaceView(this, camera);
         mCameraFrame.addView(surfaceView);
+    }
+
+    private void storageImageToDevice(Bitmap bitmap) {
+        File appDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "CameraAppNextstacks");
+
+        if (!appDirectory.exists()) {
+            appDirectory.mkdir();
+        }
+
+        File imgFile = new File(appDirectory, "IMG_" + System.currentTimeMillis() + ".png");
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(imgFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mIvPreviewImge.setImageBitmap(bitmap);
+        camera.startPreview();
+
+    }
+
+    private void readImagesFromDevice() {
+        Uri imageURI = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+
+        String[] projection = new String[]{MediaStore.Images.Media.DATA};
+
+        ArrayList<String> imagePaths = new ArrayList<>();
+
+        Cursor cursor = getApplicationContext().getContentResolver().query(imageURI, projection, null, null, null);
+
+        if (cursor != null) {
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                String image = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+                imagePaths.add(image);
+            }
+        }
     }
 }

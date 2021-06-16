@@ -19,14 +19,14 @@
         android:theme="@style/Theme.SharedPrefernce"
         android:usesCleartextTraffic="true">
         <activity android:name=".camera.CameraActivity">
-
-        </activity>
-        <activity android:name=".api.NewsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".api.NewsActivity">
+
         </activity>
         <activity android:name=".database.ViewStudentsActivity"></activity>
         <activity android:name=".database.AddStudentDetailActivity" />
