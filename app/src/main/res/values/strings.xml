@@ -5,6 +5,9 @@
     <string name="close">Close</string>
 
 
+    <string name="maps_key">AIzaSyCYYSUEY2vnY3KW4pOU0fpjmQjmXu0ZO6c</string>
+
+
     <string-array name="news_categories">
         <item>business</item>
         <item>entertainment</item>

@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -18,17 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SharedPrefernce"
         android:usesCleartextTraffic="true">
-        <activity android:name=".camera.CameraActivity">
+        <activity android:name=".location.LocationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".api.NewsActivity">
+        <activity android:name=".camera.CameraActivity">
 
         </activity>
-        <activity android:name=".database.ViewStudentsActivity"></activity>
+        <activity android:name=".api.NewsActivity"></activity>
+        <activity android:name=".database.ViewStudentsActivity" />
         <activity android:name=".database.AddStudentDetailActivity" />
         <activity android:name=".tabs.TabActivity" />
         <activity android:name=".drawerlayout.BottomNavActivity" />
@@ -36,6 +39,10 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".drawerlayout.DrawerActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/maps_key" />
     </application>
 
 </manifest>
